@@ -11,7 +11,7 @@ groq==0.13.1
 gTTS==2.5.1
 
 # RVC voice conversion (Kanevsky model)
-rvc-python==0.1.9
+rvc-python==0.1.5
 
 # PyTorch CPU (required by rvc-python, ~250MB)
 torch==2.2.2+cpu --index-url https://download.pytorch.org/whl/cpu

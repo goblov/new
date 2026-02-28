@@ -1,42 +1,19 @@
 name: Security News Bot
-
 on:
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
-
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Python 3.10
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
-      - name: Install ffmpeg
-        run: sudo apt-get install -y ffmpeg
-
-      - name: Cache pip packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-${{ hashFiles('requirements.txt') }}
-
-      - name: Cache RVC model
-        uses: actions/cache@v4
-        with:
-          path: ~/.rvc_models
-          key: rvc-model-v1
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
+      - run: sudo apt-get install -y ffmpeg
+      - run: pip install -r requirements.txt
       - name: Run bot
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
